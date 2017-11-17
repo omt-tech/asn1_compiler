@@ -40,7 +40,7 @@ defmodule Asn1Compiler.MixProject do
 
   defp docs() do
     [
-      main: "RestAuth",
+      main: "Mix.Tasks.Compile.Asn1",
       source_ref: "v#{@version}",
       source_url: "https://github.com/omt-tech/asn1_compiler"
     ]

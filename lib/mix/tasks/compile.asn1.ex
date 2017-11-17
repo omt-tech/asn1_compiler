@@ -79,7 +79,7 @@ defmodule Mix.Tasks.Compile.Asn1 do
   Returns manifests used by this compiler.
   """
   def manifests(), do: [manifest()]
-  def manifest(), do: Path.join(Mix.Project.manifest_path(), @manifest)
+  defp manifest(), do: Path.join(Mix.Project.manifest_path(), @manifest)
 
   @doc """
   Cleans up compilation artifacts.
@@ -114,11 +114,11 @@ defmodule Mix.Tasks.Compile.Asn1 do
     file |> Path.basename() |> Path.rootname()
   end
 
-  def extract_files(paths, exts) when is_list(exts) do
+  defp extract_files(paths, exts) when is_list(exts) do
     extract_files(paths, "*.{#{Enum.join(exts, ",")}}")
   end
 
-  def extract_files(paths, pattern) do
+  defp extract_files(paths, pattern) do
     Enum.flat_map(paths, fn path ->
       case File.stat(path) do
         {:ok, %{type: :directory}} -> Path.wildcard("#{path}/**/#{pattern}")
@@ -189,8 +189,8 @@ defmodule Mix.Tasks.Compile.Asn1 do
        end)
   end
 
-  def compiling_n(1, ext), do: Mix.shell().info("Compiling 1 file (.#{ext})")
-  def compiling_n(n, ext), do: Mix.shell().info("Compiling #{n} files (.#{ext})")
+  defp compiling_n(1, ext), do: Mix.shell().info("Compiling 1 file (.#{ext})")
+  defp compiling_n(n, ext), do: Mix.shell().info("Compiling #{n} files (.#{ext})")
 
   defp remove_files(to_remove) do
     to_remove
