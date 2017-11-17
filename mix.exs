@@ -34,7 +34,7 @@ defmodule Asn1Compiler.MixProject do
     [
       licences: ["MIT"],
       maintainers: ["Michał Muskała"],
-      links: %{"GitHub" => "https://github.com/omt-tech/rest_auth"}
+      links: %{"GitHub" => "https://github.com/omt-tech/asn1_compiler"}
     ]
   end
 
@@ -42,7 +42,7 @@ defmodule Asn1Compiler.MixProject do
     [
       main: "RestAuth",
       source_ref: "v#{@version}",
-      source_url: "https://github.com/omt-tech/rest_auth"
+      source_url: "https://github.com/omt-tech/asn1_compiler"
     ]
   end
 end
