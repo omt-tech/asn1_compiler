@@ -63,7 +63,7 @@ defmodule Mix.Tasks.Compile.Asn1 do
     verbose? = Keyword.get(opts, :verbose, false)
 
     # TODO: warnings_as_errors
-    options = Keyword.get(project, :ans1_options, [])
+    options = Keyword.get(project, :asn1_options, [])
 
     File.mkdir_p!(dest_path)
 
