@@ -1,0 +1,10 @@
+LDAP-V3 DEFINITIONS
+        IMPLICIT TAGS ::= --pragma {packagePrefix: "ldapd.common.ber"}
+
+        BEGIN
+
+        MessageID ::= INTEGER (0 .. maxInt)
+
+        maxInt INTEGER ::= 2147483647
+
+        END
