@@ -32,7 +32,7 @@ defmodule Asn1Compiler.MixProject do
 
   defp package() do
     [
-      licences: ["MIT"],
+      licenses: ["MIT"],
       maintainers: ["Michał Muskała"],
       links: %{"GitHub" => "https://github.com/omt-tech/asn1_compiler"}
     ]
