@@ -1,4 +1,41 @@
 defmodule Mix.Tasks.Compile.Asn1 do
+  @moduledoc """
+  A mix compiler for the ASN.1 format leveraging Erlang's `:asn1_ct`.
+
+  Once installed, the compiler can be enabled by changing project configuration in `mix.exs`:
+
+      def project() do
+        [
+          # ...
+          compilers: [:asn1] ++ Mix.compilers(),
+          asn1_options: [:maps]
+        ]
+      end
+
+  Then, you can place your `.asn1` files in the `asn1` folder. The files will be compiled to `src`
+  as Erlang modules that will be picked up by the Erlang compiler.
+
+  The `:asn1_ct` compiler accepts many options that are described in the
+  [documentation](http://erlang.org/doc/man/asn1ct.html#compile-1) - they can be passed using the
+  `asn1_options` project configuration (in the same place where the `compilers` configuration
+  lives). It is recommended to at least set the options to `[:maps]` so that the decoding
+  and encoding passes use maps rather than records.
+
+  ## Command line options
+
+    * `--force` - forces compilation regardless of modification times
+    * `--verbose` - inform about each compiled file
+
+  ## Configuration
+
+    * `:asn1_paths` - directories to find source files. Defaults to `["asn1"]`.
+    * `:erlc_paths` - directories to store generated source files. Defaults to `["src"]` (also
+      used by the erlang compiler).
+    * `:asn1_options` - compilation options that apply to ASN.1's compiler.
+      All available options are descrived in the
+      [documentation](http://erlang.org/doc/man/asn1ct.html#compile-2).
+  """
+
   # Support Elixir <= 1.6
   if Code.ensure_loaded?(Mix.Task.Compiler) do
     use Mix.Task.Compiler
@@ -14,6 +51,9 @@ defmodule Mix.Tasks.Compile.Asn1 do
 
   @switches [force: :boolean, verbose: :boolean, warnings_as_errors: :boolean]
 
+  @doc """
+  Runs this task.
+  """
   def run(args) do
     {opts, _, _} = OptionParser.parse(args, switches: @switches)
 
@@ -35,9 +75,15 @@ defmodule Mix.Tasks.Compile.Asn1 do
     end)
   end
 
+  @doc """
+  Returns manifests used by this compiler.
+  """
   def manifests(), do: [manifest()]
   def manifest(), do: Path.join(Mix.Project.manifest_path(), @manifest)
 
+  @doc """
+  Cleans up compilation artifacts.
+  """
   def clean() do
     remove_files(read_manifest(manifest()))
 
